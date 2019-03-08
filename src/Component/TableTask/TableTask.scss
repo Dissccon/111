@@ -1,0 +1,47 @@
+
+%colorBlue{
+  color: #344dc4
+}
+
+.tableTask {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .paperClass {
+    width: 100%;
+    .tableHead {
+      height: 66px;
+    }
+    .tableBody {
+      height: 75px;
+      background: #eaf6ff;
+      .tableCell {
+        @extend %colorBlue
+      }
+      .buttonTable{
+        background-color: #fff;
+        @extend %colorBlue
+      }
+    }
+  }
+  .generate {
+    margin-top: 40px;
+    margin-left: auto;
+    background: #00c4be;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+%colorBlue{
+  color: #344dc4
+}
+.taskPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1250px;
+  margin-left: auto;
+  margin-right: auto;
+  .returnButton {
+    margin-top: 70px;
+    margin-bottom: 50px;
+    background: #00c4be;
+  }
+  .paperClass {
+    width: 100%;
+    .tableHead {
+      height: 66px;
+    }
+    .tableBody {
+      height: 75px;
+      background: #eaf6ff;
+      .tableCell {
+        @extend %colorBlue
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
