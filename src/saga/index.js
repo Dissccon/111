@@ -8,6 +8,7 @@ import {
   changeTaskPageSaga,
   deleteTaskSaga,
   generateNewRowsSaga,
+  returnHomePageSaga,
 } from './saga'
 
 import {

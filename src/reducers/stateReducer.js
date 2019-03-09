@@ -14,6 +14,7 @@ import {
   CREATE_NEWTASK__SUCCESS,
   CREATE_NEWTASK__FAILURE,
 
+  CHOOSE_TABS__NOHAVE_TASK,
   CHOOSE_TABS__SUCCESS,
   CHOOSE_TABS__FAILURE,
 
@@ -112,6 +113,12 @@ export default function stateReducer(state = initialState, action) {
     }
 
 
+
+    case CHOOSE_TABS__NOHAVE_TASK: {
+      return {
+        ...state,
+      }
+    }
     case CHOOSE_TABS__SUCCESS: {
       return {
         ...state,
@@ -158,17 +165,9 @@ export default function stateReducer(state = initialState, action) {
     }
 
 
-
-
     case GENERATE_NEWROWS__SUCCESS: {
       return {
         ...state,
-        date: action.payload.date,
-        dateStart: false,
-        nameTask: '',
-        tabContainerOpen: 0,
-        isModalOpen: false,
-        isButtonState: true,
         taskPage: 1,
         rows: action.payload.newRows,
         error: undefined,
@@ -181,6 +180,17 @@ export default function stateReducer(state = initialState, action) {
       }
     }
 
+    case RETURN_HOMEPAGE__SUCCESS: {
+      return {
+        ...state,
+      }
+    }
+    case RETURN_HOMEPAGE__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
 
 
 

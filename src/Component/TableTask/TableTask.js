@@ -5,12 +5,7 @@ import {
   Button, Paper, Table, TableBody, TableCell, TableHead, TableRow,
 } from '@material-ui/core'
 import styles from './TableTask.scss'
-import { connect } from "react-redux";
-import {
-  deleteTask,
-  changeTaskPage,
-  generateNewRows,
-} from "../Actions";
+
 
 const cx = classNames.bind(styles)
 
@@ -101,6 +96,8 @@ const TableTask = ({
 }
 
 
+export default TableTask
+
 TableTask.propTypes = {
   rows: PropTypes.array.isRequired,
   deleteTask: PropTypes.func.isRequired,
@@ -108,11 +105,4 @@ TableTask.propTypes = {
   generateNewRows: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state) => ({
-  rows: state.initialState.rows,
-})
 
-export default connect(
-  mapStateToProps,
-  { deleteTask, changeTaskPage, generateNewRows }
-)(TableTask)

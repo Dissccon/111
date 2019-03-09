@@ -1,24 +1,25 @@
 import React from 'react'
-import TableTaskTest from './TableTaskTest'
-import rowsTest from './initialState'
+import generateRows from "../../helpers/generateRows";
+import TableTask from "./TableTask";
 
 
-it('State App', () => {
-  const wrapper = mount(<TableTaskTest />)
-  expect(wrapper.state().rowsTest).toEqual(rowsTest)
-  wrapper.find('.generateTest').hostNodes().simulate('click')
-  expect(wrapper.state().rowsTest).not.toEqual(rowsTest)
-  expect(wrapper.state().rowsTest).not.toHaveLength(4)
-  expect(wrapper.state().rowsTest).not.toHaveLength(5)
+it('TableTask test', () => {
+  const newRows = generateRows(10, 15, 1, 30)
+  const wrapper = mount(<TableTask rows={newRows}/>)
+  expect(wrapper.props().rows).toEqual(newRows)
+  // wrapper.find('.generateTest').hostNodes().simulate('click')
+  expect(wrapper.props().rows).toEqual(newRows)
+  expect(wrapper.props().rows).not.toHaveLength(4)
+  expect(wrapper.props().rows).not.toHaveLength(5)
   let counter = 0
-  for (const key in wrapper.state().rowsTest) {
+  for (const key in wrapper.props().rows) {
     counter += 1
   }
   expect(counter).toBeGreaterThanOrEqual(10)
   expect(counter).toBeLessThanOrEqual(15)
-  expect(wrapper.state().rowsTest[9]).toHaveProperty('id', 9)
-  expect(wrapper.state().rowsTest[9]).toHaveProperty('task', 'Task 10')
-  expect(wrapper.state().rowsTest[9]).toHaveProperty('timeStart', 'timeEnd', 'timeSpend')
+  expect(wrapper.props().rows[9]).toHaveProperty('id', 9)
+  expect(wrapper.props().rows[9]).toHaveProperty('task', 'Task 10')
+  expect(wrapper.props().rows[9]).toHaveProperty('timeStart', 'timeEnd', 'timeSpend')
 
   const mockFn = jest.fn((minTask, maxTask, MaxTimeSpendHours, MaxTimeSpendMinutes) => {
     function randomNumber(min, max) {
@@ -72,8 +73,8 @@ it('State App', () => {
   expect(MockCounter2).toBeLessThanOrEqual(25)
   expect(mockFn.mock.results[1].value[19]).toHaveProperty('id', 19)
   expect(mockFn.mock.results[1].value[19]).toHaveProperty('task', 'Task 20')
-  expect(new Date(mockFn.mock.results[1].value[19].timeSpend).getHours()).toBeGreaterThanOrEqual(0)
-  expect(new Date(mockFn.mock.results[1].value[19].timeSpend).getHours()).toBeLessThanOrEqual(12)
+  expect(new Date(mockFn.mock.results[1].value[19].timeSpend).getUTCHours()).toBeGreaterThanOrEqual(0)
+  expect(new Date(mockFn.mock.results[1].value[19].timeSpend).getUTCHours()).toBeLessThanOrEqual(12)
 
   let MockCounter3 = 0
   for (const key in mockFn.mock.results[2].value) {
@@ -83,6 +84,6 @@ it('State App', () => {
   expect(MockCounter3).toBeLessThanOrEqual(60)
   expect(mockFn.mock.results[2].value[39]).toHaveProperty('id', 39)
   expect(mockFn.mock.results[2].value[39]).toHaveProperty('task', 'Task 40')
-  expect(new Date(mockFn.mock.results[2].value[39].timeSpend).getHours()).toBeGreaterThanOrEqual(0)
-  expect(new Date(mockFn.mock.results[2].value[39].timeSpend).getHours()).toBeLessThanOrEqual(20)
+  expect(new Date(mockFn.mock.results[2].value[39].timeSpend).getUTCHours()).toBeGreaterThanOrEqual(0)
+  expect(new Date(mockFn.mock.results[2].value[39].timeSpend).getUTCHours()).toBeLessThanOrEqual(20)
 })

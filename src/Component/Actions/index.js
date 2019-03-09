@@ -17,6 +17,7 @@ export const CREATE_NEWTASK__SUCCESS = 'CREATE_NEWTASK__SUCCESS'
 export const CREATE_NEWTASK__FAILURE = 'CREATE_NEWTASK__FAILURE'
 
 export const CHOOSE_TABS = 'CHOOSE_TABS'
+export const CHOOSE_TABS__NOHAVE_TASK = 'CHOOSE_TABS__NOHAVE_TASK'
 export const CHOOSE_TABS__SUCCESS = 'CHOOSE_TABS__SUCCESS'
 export const CHOOSE_TABS__FAILURE = 'CHOOSE_TABS__FAILURE'
 
@@ -70,9 +71,9 @@ export const deleteTask = (id, rows) => ({
   payload: { id, rows, },
 })
 
-export const chooseTabs = (tabContainerValue) => ({
+export const chooseTabs = (tabContainerValue, rowsLength) => ({
   type: CHOOSE_TABS,
-  payload: { tabContainerValue, },
+  payload: { tabContainerValue, rowsLength},
 })
 
 export const changeTaskPage = (taskPage) => ({

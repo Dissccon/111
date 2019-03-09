@@ -17,6 +17,8 @@ import {
   CREATE_NEWTASK__SUCCESS,
   CREATE_NEWTASK__FAILURE,
 
+
+  CHOOSE_TABS__NOHAVE_TASK,
   CHOOSE_TABS__SUCCESS,
   CHOOSE_TABS__FAILURE,
 
@@ -57,7 +59,7 @@ export function* startTimeSaga(action) {
   try {
     yield put({
       type: START_TIME__DATA_START,
-      payload: { dateStart: new Date() }
+      payload: { dateStart: new Date().getTime() }
     })
     let newData = date
     while(true) {
@@ -109,7 +111,7 @@ export function* createNewTaskSaga(action) {
         id: 1,
         task: nameTask,
         timeStart: dateStart,
-        timeEnd: new Date(),
+        timeEnd: new Date().getTime(),
         timeSpend: date,
       }]
     } else {
@@ -117,7 +119,7 @@ export function* createNewTaskSaga(action) {
         id: rows[rows.length - 1].id + 1,
         task: nameTask,
         timeStart: dateStart,
-        timeEnd: new Date(),
+        timeEnd: new Date().getTime(),
         timeSpend: date,
       }]
     }
@@ -138,10 +140,14 @@ export function* createNewTaskSaga(action) {
 
 export function* chooseTabsSaga(action) {
   const {
-    tabContainerValue,
+    tabContainerValue, rowsLength
   } = action.payload
   try {
-    if(tabContainerValue === 1) {
+    if (rowsLength === 0){
+      yield put({
+        type: CHOOSE_TABS__NOHAVE_TASK,
+      })
+    } else if(tabContainerValue === 0) {
       yield put(push('/'))
       yield put({
         type: CHOOSE_TABS__SUCCESS,
@@ -149,7 +155,7 @@ export function* chooseTabsSaga(action) {
           tabContainerValue: 0,
         }
       })
-    } else if(tabContainerValue === 0) {
+    } else if(tabContainerValue === 1) {
       yield put(push('/TaskChart'))
       yield put({
         type: CHOOSE_TABS__SUCCESS,
@@ -207,7 +213,6 @@ export function* generateNewRowsSaga() {
     yield put({
       type: GENERATE_NEWROWS__SUCCESS,
       payload: {
-        date: new Date(70, 0),
         newRows,
       }
     })

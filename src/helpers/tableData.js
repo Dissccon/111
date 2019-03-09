@@ -7,25 +7,25 @@ const tableData = (timeStart, timeSpend) => {
   let nowHours
   for (let i = 0; i < 24; i += 1) {
     let oneHour
-    if (i === timeStart.getHours()) {
-      if (timeSpend.getHours() < 1) {
-        const minutes = 60 - timeStart.getMinutes()
-        if (minutes > timeSpend.getMinutes()) {
-          oneHour = { hour: i, minutes: timeSpend.getMinutes() }
+    if (i === timeStart.getUTCHours()) {
+      if (timeSpend.getUTCHours() < 1) {
+        const minutes = 60 - timeStart.getUTCMinutes()
+        if (minutes > timeSpend.getUTCMinutes()) {
+          oneHour = { hour: i, minutes: timeSpend.getUTCMinutes() }
         }
-        if (minutes < timeSpend.getMinutes()) {
+        if (minutes < timeSpend.getUTCMinutes()) {
           oneHour = { hour: i, minutes }
-          nowMinutes = timeSpend.getMinutes() - minutes
+          nowMinutes = timeSpend.getUTCMinutes() - minutes
           nowHours2 = i + 1
         }
       }
-      if (timeSpend.getHours() >= 1) {
-        const minutes = 60 - timeStart.getMinutes()
+      if (timeSpend.getUTCHours() >= 1) {
+        const minutes = 60 - timeStart.getUTCMinutes()
         oneHour = { hour: i, minutes }
         time = new Date(timeSpend - (minutes * 60000))
-        nexHours = time.getHours()
+        nexHours = time.getUTCHours()
         nowHours = i + 1
-        nowMinutes = time.getMinutes()
+        nowMinutes = time.getUTCMinutes()
       }
     } else if (i === nowHours2) {
       oneHour = { hour: i, minutes: nowMinutes }
